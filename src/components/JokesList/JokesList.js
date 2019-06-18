@@ -1,5 +1,11 @@
 import React from 'react';
 
+// Components
+import FavoriteButton from '../FavoriteButton/FavoriteButton';
+
+// CSS
+import './JokesList.css';
+
 class JokesList extends React.Component {
     render() {
         const {
@@ -11,11 +17,19 @@ class JokesList extends React.Component {
         }
 
         return (
-            <ul>
-                {jokes.map(joke => <li
-                    onClick={() => this.props.toogleFavorite(joke.id)}
-                    key={joke.id}>{joke.joke}</li>)
-                }
+            <ul className="jokesWrapper">
+                {jokes.map(joke => {
+                    return (
+                        <li
+                            className="joke hoverForward"
+                            key={joke.id}>
+                            <p dangerouslySetInnerHTML={{__html: joke.joke}} />
+                            <FavoriteButton
+                                isSelected={joke.isFav}
+                                handleClick={() => this.props.toogleFavorite(joke.id)} />
+                        </li>
+                    )
+                })}
             </ul>
         );
     }

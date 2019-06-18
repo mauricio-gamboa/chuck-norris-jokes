@@ -3,6 +3,7 @@ import React from 'react';
 // Components
 import GetJokesButton from '../GetJokesButton/GetJokesButton';
 import JokesList from '../JokesList/JokesList';
+import ChuckBanner from '../ChuckBanner/ChuckBanner';
 
 // Services
 import getJokes from '../../services/getJokes';
@@ -29,19 +30,20 @@ class Wrapper extends React.Component {
     render() {
         const regularJokes = this.getRegularJokes();
         const favoriteJokes = this.getFavoriteJokes();
-        const title = favoriteJokes.length ? 'Your favorite Chuck Norris quotes:' : '';
+        const title = favoriteJokes.length ? 'Your favorite Chuck Norris jokes' : '';
 
         return (
             <div>
-                <p>Hallo, Chuck Norris-fans!</p>
+                <h1>Hallo, Chuck Norris-fans!</h1>
                 <GetJokesButton handleClick={this.handleClick} />
                 <JokesList
                     jokes={regularJokes}
                     toogleFavorite={this.toogleFavorite} />
-                {title && <p>{title}</p>}
+                {title && <h2>{title}</h2>}
                 <JokesList
                     jokes={favoriteJokes}
                     toogleFavorite={this.toogleFavorite} />
+                <ChuckBanner />
             </div>
         );
     }

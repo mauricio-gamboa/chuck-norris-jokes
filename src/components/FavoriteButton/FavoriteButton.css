@@ -1,0 +1,11 @@
+.favoriteButton {
+    font-size: 16px;
+}
+
+.favoriteButton:hover {
+    color: #fa6b6b;
+}
+
+.selected {
+    color: #fa6b6b;
+}

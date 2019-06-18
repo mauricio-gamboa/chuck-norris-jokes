@@ -1,0 +1,87 @@
+body {
+    margin: 0;
+    padding: 0 16px;
+    font-family: "GT Walsheim", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: rgb(241, 242, 246);
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+button {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+/* Animations */
+
+.hoverForward {
+    transform: perspective(1px) translateZ(0);
+    transition-duration: 0.3s;
+    transition-property: transform;
+}
+
+.hoverForward:hover {
+    transform: translateX(8px);
+}
+
+.hoverBuzzOut {
+    transform: perspective(1px) translateZ(0);
+}
+
+.hoverBuzzOut:hover {
+    animation-name: hoverBuzzOut;
+    animation-duration: 0.75s;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+}
+
+@keyframes hoverBuzzOut {
+    10% {
+        transform: translateX(3px) rotate(2deg);
+    }
+    20% {
+        transform: translateX(-3px) rotate(-2deg);
+    }
+    30% {
+        transform: translateX(3px) rotate(2deg);
+    }
+    40% {
+        transform: translateX(-3px) rotate(-2deg);
+    }
+    50% {
+        transform: translateX(2px) rotate(1deg);
+    }
+    60% {
+        transform: translateX(-2px) rotate(-1deg);
+    }
+    70% {
+        transform: translateX(2px) rotate(1deg);
+    }
+    80% {
+        transform: translateX(-2px) rotate(-1deg);
+    }
+    90% {
+        transform: translateX(1px) rotate(0);
+    }
+    100% {
+        transform: translateX(-1px) rotate(0);
+    }
+}

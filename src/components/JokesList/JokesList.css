@@ -1,0 +1,15 @@
+.jokesWrapper li {
+    margin: 8px 0;
+    padding: 16px 24px 16px 16px;
+    box-shadow: 0 2px 5px 0 rgba(19, 41, 104, .2);
+    border-radius: 8px;
+    background-color: white;
+    position: relative;
+    font-size: 14px;
+}
+
+.jokesWrapper li button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
