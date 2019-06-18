@@ -5,7 +5,7 @@ class GetJokesButton extends React.Component {
         return (
             <button
                 className="getJokesButton"
-                onClick={this.props.callback}>
+                onClick={this.props.handleClick}>
                 Get 10 random Chuck Norris Jokes
             </button>
         );

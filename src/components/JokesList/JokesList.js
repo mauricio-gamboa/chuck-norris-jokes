@@ -12,7 +12,10 @@ class JokesList extends React.Component {
 
         return (
             <ul>
-                {jokes.map(joke => <li key={joke.id}>{joke.joke}</li>)}
+                {jokes.map(joke => <li
+                    onClick={() => this.props.toogleFavorite(joke.id)}
+                    key={joke.id}>{joke.joke}</li>)
+                }
             </ul>
         );
     }
