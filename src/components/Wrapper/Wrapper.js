@@ -7,6 +7,10 @@ import ChuckBanner from '../ChuckBanner/ChuckBanner';
 
 // Services
 import getJokes from '../../services/getJokes';
+import {
+    setStorage,
+    getStorage
+} from '../../services/store';
 
 // Constants
 import {
@@ -23,7 +27,7 @@ class Wrapper extends React.Component {
         super();
 
         // Read favorited jokes from session storage
-        const favoriteJokes = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_KEY)) || [];
+        const favoriteJokes = getStorage(SESSION_STORAGE_KEY);
 
         this.state = {
             jokes: [...favoriteJokes],
@@ -85,7 +89,7 @@ class Wrapper extends React.Component {
         if (index !== -1) {
             const jokesCopy = [...jokes];
             const joke = jokesCopy[index];
-            joke.isFav = !jokes[index].isFav;
+            joke.isFav = !joke.isFav;
 
             // Updates the state and saves them into session storage
             this.setState(prevState => ({
@@ -98,7 +102,7 @@ class Wrapper extends React.Component {
 
     saveInSession() {
         const favoriteJokes = this.getFavoriteJokes();
-        sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(favoriteJokes));
+        setStorage(SESSION_STORAGE_KEY, favoriteJokes);
     }
 
     getFavoriteJokes() {
