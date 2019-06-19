@@ -42,7 +42,7 @@ class Wrapper extends React.Component {
         // Bind the functions
         this.getMultipleJokes = this.getMultipleJokes.bind(this);
         this.getSingleJoke = this.getSingleJoke.bind(this);
-        this.toogleFavorite = this.toogleFavorite.bind(this);
+        this.toggleFavorite = this.toggleFavorite.bind(this);
         this.saveInSession = this.saveInSession.bind(this);
         this.getFavoriteJokes = this.getFavoriteJokes.bind(this);
         this.getRegularJokes = this.getRegularJokes.bind(this);
@@ -75,7 +75,7 @@ class Wrapper extends React.Component {
                 <JokesList
                     isDisabled={this.state.favoriteCount === 10}
                     jokes={regularJokes}
-                    toogleFavorite={this.toogleFavorite} />
+                    toggleFavorite={this.toggleFavorite} />
 
                 {favoriteJokes.length > 0 &&
                     <h2>{FAVORITE_JOKES_TEXT}
@@ -85,7 +85,7 @@ class Wrapper extends React.Component {
 
                 <JokesList
                     jokes={favoriteJokes}
-                    toogleFavorite={this.toogleFavorite} />
+                    toggleFavorite={this.toggleFavorite} />
 
                 <ChuckBanner />
             </div>
@@ -118,7 +118,7 @@ class Wrapper extends React.Component {
         });
     }
 
-    toogleFavorite(id) {
+    toggleFavorite(id) {
         const {
             jokes
         } = this.state;
