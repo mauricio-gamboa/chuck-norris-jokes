@@ -9,19 +9,7 @@ class GetJokesButton extends React.Component {
             <button
                 className="getJokesButton hoverBuzzOut"
                 onClick={this.props.handleClick}>
-                <i className="fas fa-arrow-right"></i>
-                {' '}
-                <i className="far fa-smile-wink"></i>
-                {' '}
-                <i className="far fa-smile-wink"></i>
-                {' '}
-                Click me to get 10 random <b>Chuck Norris</b> Jokes!
-                {' '}
-                <i className="far fa-smile-wink"></i>
-                {' '}
-                <i className="far fa-smile-wink"></i>
-                {' '}
-                <i className="fas fa-arrow-left"></i>
+                {this.props.children}
             </button>
         );
     }
