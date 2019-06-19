@@ -5,6 +5,8 @@ const MAX_JOKES_TEXT = 'You have reached the max favorite jokes.';
 const REMOVE_FROM_FAVORITES_TEXT = 'Remove from favorites.'
 const ADD_TO_FAVORITES_TEXT = 'Add to favorites.';
 const RANDOM_JOKES_TEXT = 'Random Jokes:';
+const STOP_TIMER_TEXT = 'Stop Adding a random joke to favorites every 5 seconds.';
+const ADD_RANDOM_JOKE_TO_FAVORITES_TEXT = 'Add a random joke to favorites every 5 seconds.'
 
 export {
     RANDOM_JOKES_API_URL,
@@ -13,5 +15,7 @@ export {
     MAX_JOKES_TEXT,
     REMOVE_FROM_FAVORITES_TEXT,
     ADD_TO_FAVORITES_TEXT,
-    RANDOM_JOKES_TEXT
+    RANDOM_JOKES_TEXT,
+    STOP_TIMER_TEXT,
+    ADD_RANDOM_JOKE_TO_FAVORITES_TEXT
 }

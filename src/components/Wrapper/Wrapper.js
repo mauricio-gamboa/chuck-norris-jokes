@@ -1,7 +1,8 @@
 import React from 'react';
 
 // Components
-import GetJokesButton from '../GetJokesButton/GetJokesButton';
+import MultipleJokesButton from '../Buttons/MultipleJokesButton/MultipleJokesButton';
+import SingleJokeButton from '../Buttons/SingleJokeButton/SingleJokeButton';
 import JokesList from '../JokesList/JokesList';
 import ChuckBanner from '../ChuckBanner/ChuckBanner';
 
@@ -17,7 +18,9 @@ import {
     SESSION_STORAGE_KEY,
     FAVORITE_JOKES_TEXT,
     MAX_JOKES_TEXT,
-    RANDOM_JOKES_TEXT
+    RANDOM_JOKES_TEXT,
+    STOP_TIMER_TEXT,
+    ADD_RANDOM_JOKE_TO_FAVORITES_TEXT
 } from '../../constants';
 
 // CSS
@@ -55,39 +58,15 @@ class Wrapper extends React.Component {
             <div>
                 <h1>Hello, Chuck Norris fans!</h1>
 
-                <GetJokesButton handleClick={this.getMultipleJokes}>
-                    <i className="fas fa-arrow-right"></i>
-                    {' '}
-                    <i className="far fa-smile-wink"></i>
-                    {' '}
-                    <i className="far fa-smile-wink"></i>
-                    {' '}
+                <MultipleJokesButton
+                    handleClick={this.getMultipleJokes}>
                     <b>Click here</b> to get 10 random <b>Chuck Norris</b> jokes!
-                    {' '}
-                    <i className="far fa-smile-wink"></i>
-                    {' '}
-                    <i className="far fa-smile-wink"></i>
-                    {' '}
-                    <i className="fas fa-arrow-left"></i>
-                </GetJokesButton>
+                </MultipleJokesButton>
 
-                <GetJokesButton handleClick={this.state.isTimerStarted ? this.stopTimer : this.startTimer}>
-                    <i className="far fa-clock"></i>
-                    {' '}
-                    <i className="far fa-surprise"></i>
-                    {' '}
-                    <i className="far fa-surprise"></i>
-                    {' '}
-                    {`${this.state.isTimerStarted ?
-                        'Stop Adding a random joke to favorites every 5 seconds.' :
-                        'Add a random joke to favorites every 5 seconds.'}`}
-                    {' '}
-                    <i className="far fa-surprise"></i>
-                    {' '}
-                    <i className="far fa-surprise"></i>
-                    {' '}
-                    <i className="far fa-clock"></i>
-                </GetJokesButton>
+                <SingleJokeButton
+                    handleClick={this.state.isTimerStarted ? this.stopTimer : this.startTimer}>
+                    {`${this.props.isTimerStarted ? STOP_TIMER_TEXT : ADD_RANDOM_JOKE_TO_FAVORITES_TEXT}`}
+                </SingleJokeButton>
 
                 {regularJokes.length > 0 &&
                     <h2>{RANDOM_JOKES_TEXT}</h2>

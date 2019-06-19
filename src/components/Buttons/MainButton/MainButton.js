@@ -1,13 +1,13 @@
 import React from 'react';
 
 // CSS
-import './GetJokesButton.css';
+import './MainButton.css';
 
-class GetJokesButton extends React.Component {
+class MainButton extends React.Component {
     render() {
         return (
             <button
-                className="getJokesButton hoverBuzzOut"
+                className="mainButton hoverBuzzOut"
                 onClick={this.props.handleClick}>
                 {this.props.children}
             </button>
@@ -15,4 +15,4 @@ class GetJokesButton extends React.Component {
     }
 }
 
-export default GetJokesButton;
+export default MainButton;

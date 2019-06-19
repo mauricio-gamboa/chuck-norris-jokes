@@ -1,4 +1,4 @@
-.getJokesButton {
+.mainButton {
     color: #1c9d79;
     background-color: #e6fef7;
     border-color: #24c89a;
@@ -9,10 +9,10 @@
     margin-bottom: 16px;
 }
 
-.getJokesButton:hover i {
+.mainButton:hover i {
     color: #fa6b6b;
 }
 
-.getJokesButton:hover b {
+.mainButton:hover b {
     color: #fa6b6b;
 }
