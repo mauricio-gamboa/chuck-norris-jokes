@@ -25,6 +25,7 @@ class JokesList extends React.Component {
                             key={joke.id}>
                             <p dangerouslySetInnerHTML={{__html: joke.joke}} />
                             <FavoriteButton
+                                isDisabled={this.props.isDisabled}
                                 isSelected={joke.isFav}
                                 handleClick={() => this.props.toogleFavorite(joke.id)} />
                         </li>

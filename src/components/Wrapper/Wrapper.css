@@ -1,0 +1,9 @@
+h2 {
+    vertical-align: middle;
+}
+
+h2 span {
+    font-size: 10px;
+    display: block;
+    color: #fa6b6b;
+}

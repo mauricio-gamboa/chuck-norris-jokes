@@ -9,15 +9,26 @@ import ChuckBanner from '../ChuckBanner/ChuckBanner';
 import getJokes from '../../services/getJokes';
 
 // Constants
-import { SESSION_STORAGE_KEY } from '../../constants';
+import {
+    SESSION_STORAGE_KEY,
+    FAVORITE_JOKES_TEXT,
+    MAX_JOKES_TEXT
+} from '../../constants';
+
+// CSS
+import './Wrapper.css';
 
 class Wrapper extends React.Component {
     constructor() {
         super();
 
+        // Read favorited jokes from session storage
         const favoriteJokes = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_KEY)) || [];
 
-        this.state = { jokes: [...favoriteJokes] };
+        this.state = {
+            jokes: [...favoriteJokes],
+            favoriteCount: favoriteJokes.length
+        };
 
         // Bind the functions
         this.handleClick = this.handleClick.bind(this);
@@ -30,19 +41,29 @@ class Wrapper extends React.Component {
     render() {
         const regularJokes = this.getRegularJokes();
         const favoriteJokes = this.getFavoriteJokes();
-        const title = favoriteJokes.length ? 'Your favorite Chuck Norris jokes' : '';
+        const title = favoriteJokes.length ? FAVORITE_JOKES_TEXT : '';
 
         return (
             <div>
                 <h1>Hallo, Chuck Norris-fans!</h1>
+
                 <GetJokesButton handleClick={this.handleClick} />
+
                 <JokesList
+                    isDisabled={this.state.favoriteCount === 10}
                     jokes={regularJokes}
                     toogleFavorite={this.toogleFavorite} />
-                {title && <h2>{title}</h2>}
+
+                {title &&
+                    <h2>{title}
+                        <span>{this.state.favoriteCount === 10 ? MAX_JOKES_TEXT : ''}</span>
+                    </h2>
+                }
+
                 <JokesList
                     jokes={favoriteJokes}
                     toogleFavorite={this.toogleFavorite} />
+
                 <ChuckBanner />
             </div>
         );
@@ -67,9 +88,11 @@ class Wrapper extends React.Component {
             joke.isFav = !jokes[index].isFav;
 
             // Updates the state and saves them into session storage
-            this.setState({
-                jokes: jokesCopy
-            }, this.saveInSession);
+            this.setState(prevState => ({
+                jokes: jokesCopy,
+                favoriteCount: joke.isFav ?
+                    prevState.favoriteCount + 1 : prevState.favoriteCount - 1
+            }), this.saveInSession);
         }
     }
 

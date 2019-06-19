@@ -9,3 +9,11 @@
 .selected {
     color: #fa6b6b;
 }
+
+.favoriteButton:disabled {
+    opacity: 0.5;
+}
+
+.favoriteButton:disabled:hover {
+    color: black;
+}
