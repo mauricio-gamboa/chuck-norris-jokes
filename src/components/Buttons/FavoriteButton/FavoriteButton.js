@@ -8,7 +8,7 @@ import {
     MAX_JOKES_TEXT,
     REMOVE_FROM_FAVORITES_TEXT,
     ADD_TO_FAVORITES_TEXT
-} from '../../constants';
+} from '../../../constants';
 
 class FavoriteButton extends React.Component {
     render() {

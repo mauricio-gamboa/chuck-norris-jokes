@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Components
-import FavoriteButton from '../FavoriteButton/FavoriteButton';
+import FavoriteButton from '../Buttons/FavoriteButton/FavoriteButton';
 
 // CSS
 import './JokesList.css';
