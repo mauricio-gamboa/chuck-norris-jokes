@@ -1,5 +1,7 @@
 # Chuck Norris Jokes app! (mobile first)
 
+Important! Please install the node module before running the scripts `npm start`;
+
 ## Available Scripts
 
 In the project directory, you can run:
