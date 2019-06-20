@@ -5,7 +5,7 @@ function hasCorrectSize(password, size) {
     return password.length <= size;
 }
 
-function isEmpty(password) {
+function isEmpty(password = '') {
     return password.length === 0;
 }
 
@@ -92,8 +92,6 @@ function getPasswordErrors(password) {
 
     return errors;
 }
-
-
 
 export {
     hasCorrectSize,

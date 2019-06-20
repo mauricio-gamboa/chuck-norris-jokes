@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import JokesList from './JokesList';
+import LoginModal from './LoginModal';
 
 it('renders without crashing (smoke test)', () => {
-    const jokes = [{ id: 10 }, { id: 20 }];
     const div = document.createElement('div');
-    ReactDOM.render(<JokesList jokes={jokes} />, div);
+    ReactDOM.render(<LoginModal />, div);
     ReactDOM.unmountComponentAtNode(div);
 });

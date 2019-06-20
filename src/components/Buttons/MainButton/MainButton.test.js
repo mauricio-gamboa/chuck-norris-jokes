@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 import MainButton from './MainButton';
 
-test('renders without crashing', () => {
+test('renders without crashing (smoke test)', () => {
     const div = document.createElement('div');
     ReactDOM.render(<MainButton />, div);
     ReactDOM.unmountComponentAtNode(div);
