@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Components
 import MainButton from '../Buttons/MainButton/MainButton'
@@ -15,115 +15,93 @@ import {
     CHUCK_NORRIS_USER_KEY
 } from '../../constants';
 
-class LoginForm extends React.Component {
-    constructor(props) {
-        super(props);
+function LoginForm(props) {
+    const {
+        successCallback,
+        toggleModal
+    } = props;
 
-        this.state = {
-            username: '',
-            password: '',
-            errors: []
-        };
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [errors, setErrors] = useState([]);
 
-        this.handleUserNameChange = this.handleUserNameChange.bind(this);
-        this.handlePasswordChange = this.handlePasswordChange.bind(this);
-        this.isUserNameValid = this.isUserNameValid.bind(this);
-        this.isPasswordValid = this.isPasswordValid.bind(this);
-        this.signIn = this.signIn.bind(this);
+    function handleUserNameChange(event) {
+        setUsername(event.target.value);
     }
 
-    render() {
-        return (
-            <form
-                noValidate
-                onSubmit={e => this.signIn(e)}>
-                <div className='box'>
-                    <input
-                        onChange={this.handleUserNameChange}
-                        type='text'
-                        name='username'
-                        value={this.state.username}
-                        placeholder='User Name' />
-                    <input
-                        onChange={this.handlePasswordChange}
-                        value={this.state.password}
-                        type='password'
-                        name='password'
-                        autoComplete='password'
-                        placeholder='Password' />
-
-                    {this.state.errors.length > 0 &&
-                        <ul className='errorsList'>
-                            {this.state.errors.map((error, index) => {
-                                return (
-                                    <li key={index}>
-                                        {`- ${error}`}
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    }
-
-                    <MainButton type='submit'>
-                        <b>Sign In</b> {' '} <i className='fas fa-sign-in-alt'></i>
-                    </MainButton>
-                </div>
-            </form>
-        );
+    function handlePasswordChange(event) {
+        const password = event.target.value;
+        setPassword(password);
+        setErrors(getPasswordErrors(password));
     }
 
-    signIn(event) {
+    function isUserNameValid() {
+        if (!username) {
+            setErrors(['User Name must not be empty.']);
+            return false;
+        }
+
+        return true;
+    }
+
+    function isPasswordValid() {
+        if (!password) {
+            setErrors(getPasswordErrors(password))
+            return false;
+        }
+
+        return true;
+    }
+
+    function signIn(event) {
         event.preventDefault();
 
-        const isFormValid = this.isUserNameValid() &&
-            this.isPasswordValid() &&
-            !this.state.errors.length;
+        const isFormValid = isUserNameValid() && isPasswordValid() && !errors.length;
 
         if (isFormValid) {
-            setStorage(CHUCK_NORRIS_USER_KEY, this.state.username);
-            this.props.successCallback();
-            this.props.toggleModal();
+            setStorage(CHUCK_NORRIS_USER_KEY, username);
+            successCallback();
+            toggleModal();
         }
     }
 
-    isUserNameValid() {
-        if (!this.state.username) {
-            this.setState({
-                errors: ['User Name must not be empty.']
-            });
+    return (
+        <form
+            noValidate
+            onSubmit={signIn}>
+            <div className='box'>
+                <input
+                    onChange={handleUserNameChange}
+                    type='text'
+                    name='username'
+                    value={username}
+                    placeholder='User Name' />
+                <input
+                    onChange={handlePasswordChange}
+                    value={password}
+                    type='password'
+                    name='password'
+                    autoComplete='password'
+                    placeholder='Password' />
 
-            return false
-        }
+                {errors.length > 0 &&
+                    <ul className='errorsList'>
+                        {errors.map((error, index) => {
+                            return (
+                                <li key={index}>
+                                    {`- ${error}`}
+                                </li>
+                            )
+                        })}
+                    </ul>
+                }
 
-        return true;
-    }
-
-    isPasswordValid() {
-        if (!this.state.password) {
-            this.setState({
-                errors: getPasswordErrors(this.state.password)
-            });
-
-            return false
-        }
-
-        return true;
-    }
-
-    handleUserNameChange(event) {
-        this.setState({
-            username: event.target.value
-        });
-    }
-
-    handlePasswordChange(event) {
-        const password = event.target.value;
-
-        this.setState({
-            password: password,
-            errors: getPasswordErrors(password)
-        });
-    }
+                <MainButton type='submit'>
+                    <b>Sign In</b> {' '} <i className='fas fa-sign-in-alt'></i>
+                </MainButton>
+            </div>
+        </form>
+    );
 }
 
 export default LoginForm;
