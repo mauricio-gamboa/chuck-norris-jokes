@@ -6,7 +6,12 @@ function getStorage(key) {
     return sessionStorage.getItem(key);
 }
 
+function clearStorage() {
+    sessionStorage.clear();
+}
+
 export {
     setStorage,
-    getStorage
+    getStorage,
+    clearStorage
 }

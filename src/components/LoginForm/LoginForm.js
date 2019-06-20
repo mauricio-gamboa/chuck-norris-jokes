@@ -25,35 +25,35 @@ function LoginForm(props) {
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
 
-    function handleUserNameChange(event) {
+    const handleUserNameChange = event => {
         setUsername(event.target.value);
-    }
+    };
 
-    function handlePasswordChange(event) {
+    const handlePasswordChange = event => {
         const password = event.target.value;
         setPassword(password);
         setErrors(getPasswordErrors(password));
-    }
+    };
 
-    function isUserNameValid() {
+    const isUserNameValid = () => {
         if (!username) {
             setErrors(['User Name must not be empty.']);
             return false;
         }
 
         return true;
-    }
+    };
 
-    function isPasswordValid() {
+    const isPasswordValid = () => {
         if (!password) {
             setErrors(getPasswordErrors(password))
             return false;
         }
 
         return true;
-    }
+    };
 
-    function signIn(event) {
+    const signIn = (event) => {
         event.preventDefault();
 
         const isFormValid = isUserNameValid() && isPasswordValid() && !errors.length;
@@ -63,7 +63,7 @@ function LoginForm(props) {
             successCallback();
             toggleModal();
         }
-    }
+    };
 
     return (
         <form

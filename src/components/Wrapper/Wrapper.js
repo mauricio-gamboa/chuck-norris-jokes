@@ -14,7 +14,8 @@ import getJokes from '../../services/getJokes';
 // Utils
 import {
     setStorage,
-    getStorage
+    getStorage,
+    clearStorage
 } from '../../utils/store';
 
 // Constants
@@ -60,6 +61,7 @@ class Wrapper extends React.Component {
         this.stopTimer = this.stopTimer.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
         this.loginSuccessCallback = this.loginSuccessCallback.bind(this);
+        this.signOut = this.signOut.bind(this);
     }
 
     render() {
@@ -75,6 +77,7 @@ class Wrapper extends React.Component {
                 }
 
                 <Header
+                    signOut={this.signOut}
                     toggleModal={this.toggleModal}
                     isUserRecognized={this.state.isUserRecognized}
                     userName={this.state.userName} />
@@ -214,6 +217,14 @@ class Wrapper extends React.Component {
 
     getUserNameFromStorage() {
         return JSON.parse(getStorage(CHUCK_NORRIS_USER_KEY)) || '';
+    }
+
+    signOut() {
+        clearStorage();
+        this.setState({
+            userName: '',
+            isUserRecognized: false
+        });
     }
 
     componentWillUnmount() {

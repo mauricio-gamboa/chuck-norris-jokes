@@ -7,7 +7,8 @@ function Header(props) {
     const {
         isUserRecognized,
         userName,
-        toggleModal
+        toggleModal,
+        signOut
     } = props;
 
     return (
@@ -16,10 +17,19 @@ function Header(props) {
                 {`Hello, ${isUserRecognized ? userName : 'Chuck Norris fans'}!`}
                 {!isUserRecognized &&
                     <button
-                        title='Sign in to Chuck Norris Jokes'
+                        title='Sign In to Chuck Norris Jokes'
                         type='button'
                         onClick={toggleModal}>
                         <i className='fas fa-sign-in-alt'></i>
+                    </button>
+                }
+
+                {isUserRecognized &&
+                    <button
+                        title='Sign Out of Chuck Norris Jokes'
+                        type='button'
+                        onClick={() => signOut()}>
+                        <i className='fas fa-sign-out-alt'></i>
                     </button>
                 }
             </h1>
