@@ -129,16 +129,24 @@ class Wrapper extends React.Component {
             return;
         }
 
+        const {
+            jokes
+        } = this.state;
+
         getJokes(1).then(json => {
             const joke = json.value;
 
             if (joke && joke.length) {
-                joke[0].isFav = true
+                const index = jokes.findIndex(oneJoke => oneJoke.id === joke[0].id);
 
-                this.setState(prevState => ({
-                    jokes: [...prevState.jokes, ...joke],
-                    favoriteCount: prevState.favoriteCount + 1
-                }), this.saveInSession);
+                if (index === -1) {
+                    joke[0].isFav = true
+
+                    this.setState(prevState => ({
+                        jokes: [...prevState.jokes, ...joke],
+                        favoriteCount: prevState.favoriteCount + 1
+                    }), this.saveInSession);
+                }
             }
         });
     }
