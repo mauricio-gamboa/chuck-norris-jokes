@@ -6,7 +6,8 @@ const REMOVE_FROM_FAVORITES_TEXT = 'Remove from favorites.'
 const ADD_TO_FAVORITES_TEXT = 'Add to favorites.';
 const RANDOM_JOKES_TEXT = 'Random Jokes:';
 const STOP_TIMER_TEXT = 'Stop Adding a random joke to favorites every 5 seconds.';
-const ADD_RANDOM_JOKE_TO_FAVORITES_TEXT = 'Add a random joke to favorites every 5 seconds.'
+const ADD_RANDOM_JOKE_TO_FAVORITES_TEXT = 'Add a random joke to favorites every 5 seconds.';
+const RECOGNIZED_USER_KEY = 'user_chuck_norris_jokes'
 
 export {
     RANDOM_JOKES_API_URL,
@@ -17,5 +18,6 @@ export {
     ADD_TO_FAVORITES_TEXT,
     RANDOM_JOKES_TEXT,
     STOP_TIMER_TEXT,
-    ADD_RANDOM_JOKE_TO_FAVORITES_TEXT
+    ADD_RANDOM_JOKE_TO_FAVORITES_TEXT,
+    RECOGNIZED_USER_KEY
 }

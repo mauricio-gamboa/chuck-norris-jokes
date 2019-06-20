@@ -1,0 +1,11 @@
+.header h1 {
+    position: relative;
+}
+
+.header h1 button {
+    margin-left: 10px;
+}
+
+.header h1 button:hover {
+    color: #fa6b6b;
+}

@@ -17,11 +17,11 @@ class JokesList extends React.Component {
         }
 
         return (
-            <ul className="jokesWrapper">
+            <ul className='jokesWrapper'>
                 {jokes.map(joke => {
                     return (
                         <li
-                            className="joke hoverForward"
+                            className='joke hoverForward'
                             key={joke.id}>
                             <p dangerouslySetInnerHTML={{__html: joke.joke}} />
                             <FavoriteButton

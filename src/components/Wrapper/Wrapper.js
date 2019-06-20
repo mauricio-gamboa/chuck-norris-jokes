@@ -1,10 +1,12 @@
 import React from 'react';
 
 // Components
+import Header from '../Header/Header'
 import MultipleJokesButton from '../Buttons/MultipleJokesButton/MultipleJokesButton';
 import SingleJokeButton from '../Buttons/SingleJokeButton/SingleJokeButton';
 import JokesList from '../JokesList/JokesList';
 import ChuckBanner from '../ChuckBanner/ChuckBanner';
+import LoginModal from '../LoginModal/LoginModal'
 
 // Services
 import getJokes from '../../services/getJokes';
@@ -20,7 +22,8 @@ import {
     MAX_JOKES_TEXT,
     RANDOM_JOKES_TEXT,
     STOP_TIMER_TEXT,
-    ADD_RANDOM_JOKE_TO_FAVORITES_TEXT
+    ADD_RANDOM_JOKE_TO_FAVORITES_TEXT,
+    RECOGNIZED_USER_KEY
 } from '../../constants';
 
 // CSS
@@ -32,11 +35,14 @@ class Wrapper extends React.Component {
 
         // Read favorited jokes from session storage
         const favoriteJokes = getStorage(SESSION_STORAGE_KEY);
+        const isUserRecognized = getStorage(RECOGNIZED_USER_KEY)
 
         this.state = {
             jokes: [...favoriteJokes],
             favoriteCount: favoriteJokes.length,
-            isTimerStarted: false
+            isTimerStarted: false,
+            isModalOpened: false,
+            isUserRecognized: isUserRecognized || false
         };
 
         // Bind the functions
@@ -48,6 +54,7 @@ class Wrapper extends React.Component {
         this.getRegularJokes = this.getRegularJokes.bind(this);
         this.startTimer = this.startTimer.bind(this);
         this.stopTimer = this.stopTimer.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
     }
 
     render() {
@@ -56,7 +63,9 @@ class Wrapper extends React.Component {
 
         return (
             <div>
-                <h1>Hello, Chuck Norris fans!</h1>
+                {this.state.isModalOpened && <LoginModal toggleModal={this.toggleModal} />}
+
+                <Header toggleModal={this.toggleModal} />
 
                 <MultipleJokesButton
                     handleClick={this.getMultipleJokes}>
@@ -164,6 +173,12 @@ class Wrapper extends React.Component {
         this.setState({
             isTimerStarted: false
         }, clearInterval(this.intervalId));
+    }
+
+    toggleModal() {
+        this.setState(prevState => ({
+            isModalOpened: !prevState.isModalOpened
+        }));
     }
 }
 

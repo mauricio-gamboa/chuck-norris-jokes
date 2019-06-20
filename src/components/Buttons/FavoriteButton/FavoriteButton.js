@@ -29,7 +29,7 @@ class FavoriteButton extends React.Component {
                 disabled={this.props.isDisabled}
                 title={title}
                 onClick={() => this.props.handleClick()}>
-                <i className="fas fa-heart"></i>
+                <i className='fas fa-heart'></i>
             </button>
         );
     }

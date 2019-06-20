@@ -1,0 +1,54 @@
+.openModal {
+    overflow-y: hidden;
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+}
+
+.loginModal {
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 100;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+}
+
+.loginModal header {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 16px;
+    padding-right: 50px;
+    border-bottom-width: 1px;
+    border-bottom: 1px solid rgb(238, 238, 238);
+    position: relative;
+}
+
+.loginModal header h3 {
+    margin: 0;
+}
+
+.closeModal {
+    position: absolute;
+    right: 16px;
+    top: 8px;
+    font-size: 30px;
+}
+
+.closeModal:hover {
+    color: #fa6b6b;
+}
+
+.modalWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    box-sizing: border-box;
+}

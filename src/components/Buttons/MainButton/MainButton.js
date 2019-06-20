@@ -7,7 +7,8 @@ class MainButton extends React.Component {
     render() {
         return (
             <button
-                className="mainButton hoverBuzzOut"
+                type={this.props.type ? this.props.type : 'button'}
+                className='mainButton hoverBuzzOut'
                 onClick={this.props.handleClick}>
                 {this.props.children}
             </button>

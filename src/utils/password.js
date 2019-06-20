@@ -1,3 +1,6 @@
+const MAX_PASSWORD_SIZE = 32;
+const CONSECUTIVE_STRING_SIZE = 3;
+
 function hasCorrectSize(password, size) {
     return password.length <= size;
 }
@@ -31,10 +34,6 @@ function containsPairOfLetters(password) {
     return false;
 }
 
-function hasCorrectSize(password, size) {
-    return password.length <= size;
-}
-
 function containsOnlyLowercaseLetters(password) {
     return /^[a-z]+$/.test(password);
 }
@@ -56,17 +55,17 @@ function getPasswordErrors(password) {
         CORRECT_SIZE: 'Passwords must not be longer than 32 characters.',
         CONSECUTIVE_STRING: 'Passwords must include one increasing straight of at least three letters, for example abc or cde.',
         PAIRS_OF_LETTERS: 'Passwords must contain at least two non-overlapping pairs of letters, for example, aa or cc.',
-        ONLY_LOWERCASE: 'Passwords must contain lower case alphabetic characters.',
+        ONLY_LOWERCASE: 'Passwords must contain lower case alphabetic characters only.',
         FORBIDDEN_LETTERS: 'Passwords must not contain the letters i, o, or l.'
     };
 
     let errors = [];
 
-    if (!hasCorrectSize(password)) {
+    if (!hasCorrectSize(password, MAX_PASSWORD_SIZE)) {
         errors.push(ERRORS.CORRECT_SIZE);
     }
 
-    if (!containsConsecutiveSubstring(password)) {
+    if (!containsConsecutiveSubstring(password, CONSECUTIVE_STRING_SIZE)) {
         errors.push(ERRORS.CONSECUTIVE_STRING);
     }
 
