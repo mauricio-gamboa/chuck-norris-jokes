@@ -11,11 +11,7 @@ class SingleJokeButton extends React.Component {
                 {' '}
                 <i className='far fa-surprise'></i>
                 {' '}
-                <i className='far fa-surprise'></i>
-                {' '}
                 {this.props.children}
-                {' '}
-                <i className='far fa-surprise'></i>
                 {' '}
                 <i className='far fa-surprise'></i>
                 {' '}

@@ -5,24 +5,30 @@ import MainButton from '../Buttons/MainButton/MainButton'
 
 // Utils
 import { getPasswordErrors } from '../../utils/password';
+import { setStorage } from '../../utils/store';
 
 // CSS
 import './LoginForm.css';
+
+// Constants
+import {
+    CHUCK_NORRIS_USER_KEY
+} from '../../constants';
 
 class LoginForm extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            userName: '',
+            username: '',
             password: '',
-            isFormValid: false,
             errors: []
         };
 
         this.handleUserNameChange = this.handleUserNameChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.isUserNameValid = this.isUserNameValid.bind(this);
+        this.isPasswordValid = this.isPasswordValid.bind(this);
         this.signIn = this.signIn.bind(this);
     }
 
@@ -37,12 +43,13 @@ class LoginForm extends React.Component {
                         type='text'
                         name='username'
                         value={this.state.username}
-                        placeholder='User name' />
+                        placeholder='User Name' />
                     <input
                         onChange={this.handlePasswordChange}
-                        value={this.state.name}
+                        value={this.state.password}
                         type='password'
                         name='password'
+                        autoComplete='password'
                         placeholder='Password' />
 
                     {this.state.errors.length > 0 &&
@@ -65,15 +72,17 @@ class LoginForm extends React.Component {
         );
     }
 
-    signIn(e) {
-        e.preventDefault();
+    signIn(event) {
+        event.preventDefault();
 
         const isFormValid = this.isUserNameValid() &&
-            this.state.password &&
+            this.isPasswordValid() &&
             !this.state.errors.length;
 
         if (isFormValid) {
-            console.log('SIGN IN USER');
+            setStorage(CHUCK_NORRIS_USER_KEY, this.state.username);
+            this.props.successCallback();
+            this.props.toggleModal();
         }
     }
 
@@ -89,9 +98,21 @@ class LoginForm extends React.Component {
         return true;
     }
 
+    isPasswordValid() {
+        if (!this.state.password) {
+            this.setState({
+                errors: getPasswordErrors(this.state.password)
+            });
+
+            return false
+        }
+
+        return true;
+    }
+
     handleUserNameChange(event) {
         this.setState({
-            userName: event.target.value,
+            username: event.target.value
         });
     }
 

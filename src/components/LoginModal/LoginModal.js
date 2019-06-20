@@ -20,7 +20,9 @@ class LoginModal extends React.Component {
                             <i className='fas fa-times'></i>
                         </button>
                     </header>
-                    <LoginForm />
+                    <LoginForm
+                        successCallback={this.props.successCallback}
+                        toggleModal={this.props.toggleModal} />
                 </div>
             </div>
         );

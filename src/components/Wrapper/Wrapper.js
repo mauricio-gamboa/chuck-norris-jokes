@@ -10,6 +10,8 @@ import LoginModal from '../LoginModal/LoginModal'
 
 // Services
 import getJokes from '../../services/getJokes';
+
+// Utils
 import {
     setStorage,
     getStorage
@@ -23,7 +25,7 @@ import {
     RANDOM_JOKES_TEXT,
     STOP_TIMER_TEXT,
     ADD_RANDOM_JOKE_TO_FAVORITES_TEXT,
-    RECOGNIZED_USER_KEY
+    CHUCK_NORRIS_USER_KEY
 } from '../../constants';
 
 // CSS
@@ -34,15 +36,17 @@ class Wrapper extends React.Component {
         super();
 
         // Read favorited jokes from session storage
-        const favoriteJokes = getStorage(SESSION_STORAGE_KEY);
-        const isUserRecognized = getStorage(RECOGNIZED_USER_KEY)
+        const favoriteJokes = JSON.parse(getStorage(SESSION_STORAGE_KEY)) || [];
+        const userName = this.getUserNameFromStorage();
+        const isUserRecognized = !!userName || false;
 
         this.state = {
             jokes: [...favoriteJokes],
             favoriteCount: favoriteJokes.length,
             isTimerStarted: false,
             isModalOpened: false,
-            isUserRecognized: isUserRecognized || false
+            isUserRecognized: isUserRecognized,
+            userName: userName
         };
 
         // Bind the functions
@@ -55,6 +59,7 @@ class Wrapper extends React.Component {
         this.startTimer = this.startTimer.bind(this);
         this.stopTimer = this.stopTimer.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
+        this.loginSuccessCallback = this.loginSuccessCallback.bind(this);
     }
 
     render() {
@@ -63,38 +68,49 @@ class Wrapper extends React.Component {
 
         return (
             <div>
-                {this.state.isModalOpened && <LoginModal toggleModal={this.toggleModal} />}
-
-                <Header toggleModal={this.toggleModal} />
-
-                <MultipleJokesButton
-                    handleClick={this.getMultipleJokes}>
-                    <b>Click here</b> to get 10 random <b>Chuck Norris</b> jokes!
-                </MultipleJokesButton>
-
-                <SingleJokeButton
-                    handleClick={this.state.isTimerStarted ? this.stopTimer : this.startTimer}>
-                    {`${this.props.isTimerStarted ? STOP_TIMER_TEXT : ADD_RANDOM_JOKE_TO_FAVORITES_TEXT}`}
-                </SingleJokeButton>
-
-                {regularJokes.length > 0 &&
-                    <h2>{RANDOM_JOKES_TEXT}</h2>
+                {this.state.isModalOpened &&
+                    <LoginModal
+                        successCallback={this.loginSuccessCallback}
+                        toggleModal={this.toggleModal} />
                 }
 
-                <JokesList
-                    isDisabled={this.state.favoriteCount === 10}
-                    jokes={regularJokes}
-                    toggleFavorite={this.toggleFavorite} />
+                <Header
+                    toggleModal={this.toggleModal}
+                    isUserRecognized={this.state.isUserRecognized}
+                    userName={this.state.userName} />
 
-                {favoriteJokes.length > 0 &&
-                    <h2>{FAVORITE_JOKES_TEXT}
-                        <span>{this.state.favoriteCount === 10 ? MAX_JOKES_TEXT : ''}</span>
-                    </h2>
+                {this.state.isUserRecognized &&
+                    <div>
+                        <MultipleJokesButton
+                            handleClick={this.getMultipleJokes}>
+                            <b>Click here</b> to get <b>10</b> random <b>Chuck Norris</b> jokes!
+                        </MultipleJokesButton>
+
+                        <SingleJokeButton
+                            handleClick={this.state.isTimerStarted ? this.stopTimer : this.startTimer}>
+                            {`${this.state.isTimerStarted ? STOP_TIMER_TEXT : ADD_RANDOM_JOKE_TO_FAVORITES_TEXT}`}
+                        </SingleJokeButton>
+
+                        {regularJokes.length > 0 &&
+                            <h2>{RANDOM_JOKES_TEXT}</h2>
+                        }
+
+                        <JokesList
+                            isDisabled={this.state.favoriteCount === 10}
+                            jokes={regularJokes}
+                            toggleFavorite={this.toggleFavorite} />
+
+                        {favoriteJokes.length > 0 &&
+                            <h2>{FAVORITE_JOKES_TEXT}
+                                <span>{this.state.favoriteCount === 10 ? MAX_JOKES_TEXT : ''}</span>
+                            </h2>
+                        }
+
+                        <JokesList
+                            jokes={favoriteJokes}
+                            toggleFavorite={this.toggleFavorite} />
+                    </div>
                 }
-
-                <JokesList
-                    jokes={favoriteJokes}
-                    toggleFavorite={this.toggleFavorite} />
 
                 <ChuckBanner />
             </div>
@@ -179,6 +195,23 @@ class Wrapper extends React.Component {
         this.setState(prevState => ({
             isModalOpened: !prevState.isModalOpened
         }));
+    }
+
+    loginSuccessCallback() {
+        this.setState({
+            isUserRecognized: true,
+            userName: this.getUserNameFromStorage()
+        });
+    }
+
+    getUserNameFromStorage() {
+        return JSON.parse(getStorage(CHUCK_NORRIS_USER_KEY)) || '';
+    }
+
+    componentWillUnmount() {
+        if (this.intervalId) {
+            clearInterval(this.intervalId);
+        }
     }
 }
 

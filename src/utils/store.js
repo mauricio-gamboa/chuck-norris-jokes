@@ -3,7 +3,7 @@ function setStorage(key, value) {
 }
 
 function getStorage(key) {
-    return JSON.parse(sessionStorage.getItem(key)) || [];
+    return sessionStorage.getItem(key);
 }
 
 export {

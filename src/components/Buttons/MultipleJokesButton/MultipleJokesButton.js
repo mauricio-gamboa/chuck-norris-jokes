@@ -11,11 +11,7 @@ class MultipleJokesButton extends React.Component {
                 {' '}
                 <i className='far fa-smile-wink'></i>
                 {' '}
-                <i className='far fa-smile-wink'></i>
-                {' '}
                 {this.props.children}
-                {' '}
-                <i className='far fa-smile-wink'></i>
                 {' '}
                 <i className='far fa-smile-wink'></i>
                 {' '}

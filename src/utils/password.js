@@ -5,6 +5,10 @@ function hasCorrectSize(password, size) {
     return password.length <= size;
 }
 
+function isEmpty(password) {
+    return password.length === 0;
+}
+
 function containsConsecutiveSubstring(password, substringSize) {
     const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
@@ -56,13 +60,18 @@ function getPasswordErrors(password) {
         CONSECUTIVE_STRING: 'Passwords must include one increasing straight of at least three letters, for example abc or cde.',
         PAIRS_OF_LETTERS: 'Passwords must contain at least two non-overlapping pairs of letters, for example, aa or cc.',
         ONLY_LOWERCASE: 'Passwords must contain lower case alphabetic characters only.',
-        FORBIDDEN_LETTERS: 'Passwords must not contain the letters i, o, or l.'
+        FORBIDDEN_LETTERS: 'Passwords must not contain the letters i, o, or l.',
+        EMPTY: 'Please enter a password.'
     };
 
     let errors = [];
 
     if (!hasCorrectSize(password, MAX_PASSWORD_SIZE)) {
         errors.push(ERRORS.CORRECT_SIZE);
+    }
+
+    if (isEmpty(password)) {
+        errors.push(ERRORS.EMPTY);
     }
 
     if (!containsConsecutiveSubstring(password, CONSECUTIVE_STRING_SIZE)) {
@@ -84,8 +93,11 @@ function getPasswordErrors(password) {
     return errors;
 }
 
+
+
 export {
     hasCorrectSize,
+    isEmpty,
     containsConsecutiveSubstring,
     containsPairOfLetters,
     containsOnlyLowercaseLetters,
