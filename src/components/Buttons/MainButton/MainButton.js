@@ -3,17 +3,21 @@ import React from 'react';
 // CSS
 import './MainButton.css';
 
-class MainButton extends React.Component {
-    render() {
-        return (
-            <button
-                type={this.props.type ? this.props.type : 'button'}
-                className='mainButton hoverBuzzOut'
-                onClick={this.props.handleClick}>
-                {this.props.children}
-            </button>
-        );
-    }
+function MainButton(props) {
+    const {
+        type,
+        handleClick,
+        children
+    } = props;
+
+    return (
+        <button
+            type={type ? type : 'button'}
+            className='mainButton hoverBuzzOut'
+            onClick={handleClick}>
+            {children}
+        </button>
+    );
 }
 
 export default MainButton;
