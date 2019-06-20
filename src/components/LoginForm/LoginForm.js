@@ -56,7 +56,7 @@ function LoginForm(props) {
     const signIn = (event) => {
         event.preventDefault();
 
-        const isFormValid = isUserNameValid() && isPasswordValid() && !errors.length;
+        const isFormValid = isUserNameValid() && isPasswordValid();
 
         if (isFormValid) {
             setStorage(CHUCK_NORRIS_USER_KEY, username);
