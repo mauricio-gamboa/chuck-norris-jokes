@@ -27,7 +27,7 @@ class JokesList extends React.Component {
                             <FavoriteButton
                                 isDisabled={this.props.isDisabled}
                                 isSelected={joke.isFav}
-                                handleClick={() => this.props.toogleFavorite(joke.id)} />
+                                handleClick={() => this.props.toggleFavorite(joke.id)} />
                         </li>
                     )
                 })}

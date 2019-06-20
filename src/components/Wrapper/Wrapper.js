@@ -11,7 +11,7 @@ import getJokes from '../../services/getJokes';
 import {
     setStorage,
     getStorage
-} from '../../services/store';
+} from '../../utils/store';
 
 // Constants
 import {
