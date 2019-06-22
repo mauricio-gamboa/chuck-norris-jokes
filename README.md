@@ -1,6 +1,6 @@
 # Chuck Norris Jokes app! (mobile first)
 
-Important! Please install the node module before running the scripts `npm start`;
+Important! Please install the node modules with `npm start` before running the scripts;
 
 ## Available Scripts
 
@@ -24,3 +24,5 @@ Builds the app for production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.<br>
+
+If you want to run the production build locally, navigate to the build folder in the terminal and start a local server.
