@@ -1,6 +1,6 @@
 # Chuck Norris Jokes app! (mobile first)
 
-Important! Please install the node modules with `npm start` before running the scripts;
+Important! Please install the node modules with `npm start` before running the scripts.
 
 ## Available Scripts
 
